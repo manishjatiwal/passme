@@ -1,0 +1,14 @@
+.relativeElements {
+    position: relative;
+}
+
+.keyComponent {
+    height: 16px;
+    width: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 16px;
+    z-index: 9999999999;
+    position: absolute;
+    cursor: pointer;
+    }

@@ -1,0 +1,24 @@
+{
+  "name": "PassMe",
+  "description": "A password manager chrome extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "file:///*"],
+      "js": ["content-script.js"],
+      "css": ["content-script/index.css"],
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup/index.html"
+  },
+  "icons": {
+    "16": "/images/key16.png",
+    "32": "/images/key32.png",
+    "48": "/images/key48.png",
+    "128": "/images/key128.png"
+  }
+}
