@@ -8,7 +8,6 @@
     {
       "matches": ["https://*/*", "file:///*"],
       "js": ["content-script.js"],
-      "css": ["content-script/index.css"],
       "all_frames": true
     }
   ],
