@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   mode: 'production',
   entry: {
@@ -5,9 +7,17 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: __dirname
+    path: __dirname + '/build'
   },
-  resolve: { fallback: { util: false } },
+  resolve: {
+    fallback: { util: false },
+    extensions: ['.js', '.jsx'],
+    alias: {
+      components: path.join(__dirname, './components'),
+      utils: path.join(__dirname, './utils'),
+      icons: path.join(__dirname, './icons')
+    }
+  },
   module: {
     rules: [
       {

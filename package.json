@@ -4,7 +4,7 @@
   "description": "A password manager chrome extension",
   "main": "manifest.json",
   "scripts": {
-    "build": "webpack --watch"
+    "start": "webpack --watch"
   },
   "repository": {
     "type": "git",
