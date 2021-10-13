@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from 'components/header'
-import Item from './item'
+import PasswordGenerator from './generator'
 import { Container } from './style'
 
 function Dropdown({ styles, showDropdown }) {
@@ -9,9 +9,7 @@ function Dropdown({ styles, showDropdown }) {
   return (
     <Container styles={styles} showDropdown={showDropdown}>
       <Header />
-      <Item />
-      <Item />
-      <Item />
+      <PasswordGenerator />
     </Container>
   )
 }

@@ -1,3 +1,5 @@
+import React from 'react'
+
 function randomCharGenerator() {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
   const random = Math.floor(Math.random() * characters.length)
@@ -19,6 +21,7 @@ function randomSymbolGenerator() {
 function randomPasswordGenerator(config = {}) {
   const { length = 10, includeDigits = true, includeSymbols = true } = config
   let randomPassword = ''
+  const randomStyledPassword = []
   // Types define what type of random char to be generated
   // 0 - characher
   // 1 - digit
@@ -29,21 +32,26 @@ function randomPasswordGenerator(config = {}) {
   if (!includeSymbols) types = types.replace(/2/g, '0')
 
   for (let i = 1; i <= length; i++) {
-    const random = Math.floor(Math.random() * types.length)
-    const type = types[random]
+    const randomTypes = Math.floor(Math.random() * types.length)
+    const type = types[randomTypes]
+    let random = ''
     switch (type) {
       case '1':
-        randomPassword += randomDigitGenerator()
+        random = randomDigitGenerator()
+        randomStyledPassword.push(<span className="digit">{random}</span>)
         break
       case '2':
-        randomPassword += randomSymbolGenerator()
+        random = randomSymbolGenerator()
+        randomStyledPassword.push(<span className="symbol">{random}</span>)
         break
       default:
-        randomPassword += randomCharGenerator()
+        random = randomCharGenerator()
+        randomStyledPassword.push(<span className="char">{random}</span>)
         break
     }
+    randomPassword += random
   }
-  return randomPassword
+  return [randomPassword, randomStyledPassword]
 }
 
 export default randomPasswordGenerator

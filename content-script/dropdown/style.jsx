@@ -10,22 +10,45 @@ export const Container = styled.div`
   width: ${props => props.styles.width}px;
 `
 
-export const Item = styled.div`
+export const Generator = styled.div`
   padding: 8px;
-  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
 `
 
 export const Password = styled.div`
+  font-size: 16px;
   -webkit-text-security: ${props =>
     props.showPassword ? 'none' : 'disc'} !important;
+
+  .symbol {
+    color: ${props => (props.showPassword ? '#c15315' : 'inherit')};
+  }
+
+  .digit {
+    color: ${props => (props.showPassword ? '#36f' : 'inherit')};
+  }
 `
 
 export const Actions = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+
+  div {
+    margin: 0 12px;
+  }
+
   svg {
-    width: 12px;
+    width: 16px;
+
+    &.sync {
+      width: 12px;
+    }
   }
 `
