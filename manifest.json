@@ -1,0 +1,16 @@
+{
+  "name": "PassMe",
+  "description": "A password manager chrome extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup/index.html"
+  },
+  "icons": {
+    "16": "/icons/key/key16.png",
+    "32": "/icons/key/key32.png",
+    "48": "/icons/key/key48.png",
+    "128": "/icons/key/key128.png"
+  }
+}
