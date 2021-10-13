@@ -52,3 +52,16 @@ export const Actions = styled.div`
     }
   }
 `
+
+export const Settings = styled.div`
+  padding: 8px;
+`
+
+export const Button = styled.div`
+  padding: 8px;
+
+  button {
+    width: 100%;
+    cursor: pointer;
+  }
+`
