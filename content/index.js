@@ -1,3 +1,5 @@
-setTimeout(() => {
-  alert('Content Script Working')
-}, 5000)
+import initContentScript from './base'
+
+setTimeout(function () {
+  initContentScript()
+}, 0)
