@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { v4 as uuid } from 'uuid'
 import PassmeContainer from './PassmeContainer'
 import KeyIcon from '../KeyIcon'
 import Vessel from '../Vessel'
@@ -14,8 +15,7 @@ function renderPassmeComponents(element, dispatch) {
   // Render a Key Component for [type="password"] elements
   if (element.type.toLowerCase() === 'password') {
     element.setAttribute('data-passme-identified', true)
-
-    dispatch(addItem(element))
+    dispatch(addItem({ element, id: uuid() }))
   }
 
   // Render Tracker Component for [type="text"] and [type="email"] elements
@@ -43,6 +43,7 @@ function onDomChange(dispatch) {
  */
 function DomWatcher() {
   const list = useSelector(state => state.input.list)
+  const uuidList = useSelector(state => state.input.uuidList)
   const dispatch = useDispatch()
   useEffect(() => {
     onDomChange(dispatch)
@@ -62,11 +63,11 @@ function DomWatcher() {
   return (
     <PassmeContainer>
       Dom Watcher Embedded
-      {list.map(element => {
+      {uuidList.map(uuid => {
         return (
           <>
-            <KeyIcon element={element} />
-            <Vessel element={element} />
+            <KeyIcon element={list[uuid]} uuid={uuid} />
+            <Vessel element={list[uuid]} uuid={uuid} />
           </>
         )
       })}

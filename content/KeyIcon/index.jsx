@@ -6,7 +6,7 @@ import Icon from './Icon'
  * element that can be used to fill a specified password or generate a new
  * password.
  */
-function KeyIcon({ element }) {
+function KeyIcon({ element, uuid }) {
   return <Icon />
 }
 

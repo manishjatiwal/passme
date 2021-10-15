@@ -1,7 +1,8 @@
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  list: []
+  list: {},
+  uuidList: []
 }
 
 export const inputSlice = createSlice({
@@ -9,7 +10,8 @@ export const inputSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      state.list.push(action.payload)
+      state.uuidList.push(action.payload.id)
+      state.list[action.payload.id] = action.payload.element
     }
   }
 })
