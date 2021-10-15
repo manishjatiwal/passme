@@ -15,7 +15,8 @@ module.exports = {
     alias: {
       components: path.join(__dirname, './components'),
       helpers: path.join(__dirname, './helpers'),
-      icons: path.join(__dirname, './icons')
+      icons: path.join(__dirname, './icons'),
+      _redux: path.join(__dirname, './redux')
     }
   },
   module: {

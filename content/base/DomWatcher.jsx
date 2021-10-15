@@ -1,27 +1,21 @@
 import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import PassmeContainer from './PassmeContainer'
 import KeyIcon from '../KeyIcon'
 import Vessel from '../Vessel'
+import { addItem } from '_redux/inputSlice'
 /**
  * This function will render the required Passme React component
  */
-function renderPassmeComponents(element) {
+function renderPassmeComponents(element, dispatch) {
   // Return in case Passme already iterated the element
   const identified = Boolean(element.getAttribute('data-passme-identified'))
   if (identified) return
-
   // Render a Key Component for [type="password"] elements
   if (element.type.toLowerCase() === 'password') {
     element.setAttribute('data-passme-identified', true)
 
-    const body = document.getElementsByTagName('body')[0]
-    const keyIconContainer = document.createElement('div')
-    const vesselContainer = document.createElement('div')
-    body.appendChild(keyIconContainer)
-    body.appendChild(vesselContainer)
-
-    ReactDOM.render(<KeyIcon element={element} />, keyIconContainer)
-    ReactDOM.render(<Vessel element={element} />, vesselContainer)
+    dispatch(addItem(element))
   }
 
   // Render Tracker Component for [type="text"] and [type="email"] elements
@@ -30,16 +24,16 @@ function renderPassmeComponents(element) {
 /**
  * This function will be called when DOM changes occurs
  */
-function onDomChange() {
+function onDomChange(dispatch) {
   try {
     const inputElements = document.getElementsByTagName('input')
     if (inputElements && inputElements.length) {
       for (const element of inputElements) {
-        renderPassmeComponents(element)
+        renderPassmeComponents(element, dispatch)
       }
     }
   } catch (error) {
-    console.log({ error })
+    console.log(error)
   }
 }
 
@@ -48,10 +42,13 @@ function onDomChange() {
  * fields on the page
  */
 function DomWatcher() {
+  const list = useSelector(state => state.input.list)
+  const dispatch = useDispatch()
   useEffect(() => {
-    onDomChange()
+    onDomChange(dispatch)
+    // Add DOM mutation observer to subscribe to any DOM changes
     const observer = new MutationObserver(function () {
-      onDomChange()
+      onDomChange(dispatch)
     })
     observer.observe(document.getElementsByTagName('body')[0], {
       childList: true,
@@ -63,9 +60,17 @@ function DomWatcher() {
   }, [])
 
   return (
-    <div id="passme-dom-watcher" style={{ display: 'none' }}>
+    <PassmeContainer>
       Dom Watcher Embedded
-    </div>
+      {list.map(element => {
+        return (
+          <>
+            <KeyIcon element={element} />
+            <Vessel element={element} />
+          </>
+        )
+      })}
+    </PassmeContainer>
   )
 }
 
