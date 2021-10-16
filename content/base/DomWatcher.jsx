@@ -9,9 +9,10 @@ import { addItem, updateStyle } from '_redux/inputSlice'
  * This function will render the required Passme React component
  */
 function renderPassmeComponents(element, dispatch) {
-  // Return in case Passme already iterated the element
+  // Return if case Passme already iterated the element
   const identified = Boolean(element.getAttribute('data-passme-identified'))
   if (identified) return
+
   // Render a Key Component for [type="password"] elements
   if (element.type.toLowerCase() === 'password') {
     element.setAttribute('data-passme-identified', true)
@@ -42,9 +43,10 @@ function onDomChange(dispatch) {
  * fields on the page
  */
 function DomWatcher() {
-  const list = useSelector(state => state.input.list)
   const uuidList = useSelector(state => state.input.uuidList)
   const dispatch = useDispatch()
+  // On DOM changes related to input elements, dispatching updateStyle to
+  // update the position coordinates for Passme Components.
   const dipatchUpdateStyles = () => {
     dispatch(updateStyle())
   }
@@ -74,8 +76,8 @@ function DomWatcher() {
       {uuidList.map(uuid => {
         return (
           <>
-            <KeyIcon element={list[uuid]} uuid={uuid} />
-            <Vessel element={list[uuid]} uuid={uuid} />
+            <KeyIcon uuid={uuid} />
+            <Vessel uuid={uuid} />
           </>
         )
       })}

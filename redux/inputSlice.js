@@ -4,7 +4,8 @@ const initialState = {
   list: {},
   uuidList: [],
   iconStyles: {},
-  vesselStyles: {}
+  vesselStyles: {},
+  vesselVisiblity: {}
 }
 
 export const inputSlice = createSlice({
@@ -24,11 +25,16 @@ export const inputSlice = createSlice({
         state.iconStyles[uuid] = iconStyles(state.list[uuid])
         state.vesselStyles[uuid] = vesselStyles(state.list[uuid])
       })
+    },
+    toogleVesselVisiblity: (state, action) => {
+      state.vesselVisiblity[action.payload] =
+        !state.vesselVisiblity[action.payload]
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { addItem, updateStyle } = inputSlice.actions
+export const { addItem, updateStyle, toogleVesselVisiblity } =
+  inputSlice.actions
 
 export default inputSlice.reducer

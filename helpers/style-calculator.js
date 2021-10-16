@@ -1,6 +1,9 @@
 function iconStyles(element) {
-  const { top, left, height, width } = element.getBoundingClientRect()
+  let { top, left, height, width } = element.getBoundingClientRect()
   const style = element.currentStyle || window.getComputedStyle(element)
+  if (top === 0 || left === 0) {
+    top = left = -200
+  }
   return {
     top: top + (height - 16) / 2,
     left:
@@ -13,7 +16,10 @@ function iconStyles(element) {
 }
 
 function vesselStyles(element) {
-  const { top, left, height, width } = element.getBoundingClientRect()
+  let { top, left, height, width } = element.getBoundingClientRect()
+  if (top === 0 || left === 0) {
+    top = left = -200
+  }
   return {
     top: top + height,
     left,
