@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Icon from './Icon'
 
 /**
@@ -7,7 +8,8 @@ import Icon from './Icon'
  * password.
  */
 function KeyIcon({ element, uuid }) {
-  return <Icon />
+  const iconStyles = useSelector(state => state.input.iconStyles)
+  return <Icon styles={iconStyles[uuid]} />
 }
 
 export default KeyIcon

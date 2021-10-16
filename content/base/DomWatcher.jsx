@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid'
 import PassmeContainer from './PassmeContainer'
 import KeyIcon from '../KeyIcon'
 import Vessel from '../Vessel'
-import { addItem } from '_redux/inputSlice'
+import { addItem, updateStyle } from '_redux/inputSlice'
 /**
  * This function will render the required Passme React component
  */
@@ -45,18 +45,26 @@ function DomWatcher() {
   const list = useSelector(state => state.input.list)
   const uuidList = useSelector(state => state.input.uuidList)
   const dispatch = useDispatch()
+  const dipatchUpdateStyles = () => {
+    dispatch(updateStyle())
+  }
   useEffect(() => {
     onDomChange(dispatch)
     // Add DOM mutation observer to subscribe to any DOM changes
     const observer = new MutationObserver(function () {
       onDomChange(dispatch)
+      dipatchUpdateStyles()
     })
     observer.observe(document.getElementsByTagName('body')[0], {
       childList: true,
       subtree: true
     })
+    window.addEventListener('resize', dipatchUpdateStyles)
+    window.addEventListener('scroll', dipatchUpdateStyles)
     return () => {
       observer.disconnect()
+      window.removeEventListener('resize', dipatchUpdateStyles)
+      window.removeEventListener('scroll', dipatchUpdateStyles)
     }
   }, [])
 
