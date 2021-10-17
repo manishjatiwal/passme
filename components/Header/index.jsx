@@ -1,12 +1,12 @@
 import React from 'react'
-import { Icon } from './styles'
+import { Icon, Container } from './styles'
 
 function Header() {
   return (
-    <div>
+    <Container>
       <Icon />
-      Header
-    </div>
+      Passme Password Manager
+    </Container>
   )
 }
 

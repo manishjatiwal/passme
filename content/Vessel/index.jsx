@@ -10,7 +10,6 @@ function Vessel({ uuid }) {
     return (
       <Container styles={vesselStyles[uuid]}>
         <Header />
-        <Header />
       </Container>
     )
 

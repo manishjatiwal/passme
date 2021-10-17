@@ -7,6 +7,7 @@ const PassmeContainer = styled.div.attrs({
   z-index: 999999;
   top: -100px;
   left: -100px;
+  font-family: monospace;
 `
 
 export default PassmeContainer
