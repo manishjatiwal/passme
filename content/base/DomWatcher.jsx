@@ -59,7 +59,8 @@ function DomWatcher() {
     })
     observer.observe(document.getElementsByTagName('body')[0], {
       childList: true,
-      subtree: true
+      subtree: true,
+      attributes: true
     })
     window.addEventListener('resize', dipatchUpdateStyles)
     window.addEventListener('scroll', dipatchUpdateStyles)

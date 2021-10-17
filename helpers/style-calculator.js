@@ -21,7 +21,7 @@ function vesselStyles(element) {
     top = left = -200
   }
   return {
-    top: top + height,
+    top: top + height + 6,
     left,
     width
   }
