@@ -9,19 +9,18 @@ const Container = styled.div`
 
   .random-password {
     margin-top: 16px;
-    -webkit-text-security: ${props =>
-      props.showPassword ? 'none' : 'disc'} !important;
 
     .symbol {
-      color: ${props => (props.showPassword ? '#c15315' : 'inherit')};
+      color: #c15315;
     }
 
     .digit {
-      color: ${props => (props.showPassword ? '#36f' : 'inherit')};
+      color: #36f;
     }
   }
 
   .random-password-actions {
+    user-select: none;
     margin-top: 16px;
     display: flex;
     flex-direction: row;
@@ -41,7 +40,7 @@ const Container = styled.div`
 
     svg {
       width: 16px;
-
+      cursor: pointer;
       &.sync {
         width: 12px;
       }

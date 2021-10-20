@@ -11,7 +11,7 @@ function Vessel({ uuid }) {
     return (
       <Container styles={vesselStyles[uuid]}>
         <Header />
-        <PasswordGenerator />
+        <PasswordGenerator uuid={uuid} />
       </Container>
     )
 

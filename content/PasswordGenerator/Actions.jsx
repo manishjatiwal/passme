@@ -1,14 +1,30 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Regenerate from './icons/sync'
 import Settings from './icons/cog'
+import { generatePassword } from '_redux/passwordSlice'
+import { autofillGeneratedPassword } from '_redux/inputSlice'
 
-function Actions() {
+function Actions({ uuid }) {
+  const dispatch = useDispatch()
+  const password = useSelector(state => state.password.password)
   return (
     <div className='random-password-actions'>
-      <button>Use Generated Password</button>
+      <button
+        type='button'
+        onClick={() => {
+          dispatch(autofillGeneratedPassword({ uuid, password }))
+        }}
+      >
+        Use Generated Password
+      </button>
       <div className='middle-icon'>
-        <Regenerate className='sync' />
+        <Regenerate
+          onClick={() => {
+            dispatch(generatePassword())
+          }}
+          className='sync'
+        />
       </div>
       <Settings />
     </div>

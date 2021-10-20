@@ -10,13 +10,14 @@ import { addItem, updateStyle } from '_redux/inputSlice'
  */
 function renderPassmeComponents(element, dispatch) {
   // Return if case Passme already iterated the element
-  const identified = Boolean(element.getAttribute('data-passme-identified'))
-  if (identified) return
+  const passmeIdentifierExists = element.getAttribute('data-passme-identifier')
+  if (passmeIdentifierExists !== null) return
 
   // Render a Key Component for [type="password"] elements
   if (element.type.toLowerCase() === 'password') {
-    element.setAttribute('data-passme-identified', true)
-    dispatch(addItem({ element, id: uuid() }))
+    const passmeIdentifier = uuid()
+    element.setAttribute('data-passme-identifier', passmeIdentifier)
+    dispatch(addItem({ uuid: passmeIdentifier }))
   }
 
   // Render Tracker Component for [type="text"] and [type="email"] elements
