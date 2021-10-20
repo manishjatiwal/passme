@@ -4,20 +4,32 @@ import { v4 as uuid } from 'uuid'
 import PassmeContainer from './PassmeContainer'
 import KeyIcon from '../KeyIcon'
 import Vessel from '../Vessel'
-import { addItem, updateStyle } from '_redux/inputSlice'
+import { addItem, updateStyle, toogleVesselVisiblity } from '_redux/inputSlice'
+
 /**
- * This function will render the required Passme React component
+ * This function adds an focus change listiner on provided input elements
  */
-function renderPassmeComponents(element, dispatch) {
+function addEventListeners(element, dispatch) {
+  const uuid = element.getAttribute('data-passme-identifier')
+  element.addEventListener('focus', event => {
+    dispatch(toogleVesselVisiblity(uuid))
+  })
+}
+
+/**
+ * This function will keep track all the input elements in document
+ */
+function addPassmeIdentifier(element, dispatch) {
   // Return if case Passme already iterated the element
   const passmeIdentifierExists = element.getAttribute('data-passme-identifier')
   if (passmeIdentifierExists !== null) return
 
-  // Render a Key Component for [type="password"] elements
+  // Add a uuid identifier for [type="password"] elements
   if (element.type.toLowerCase() === 'password') {
     const passmeIdentifier = uuid()
     element.setAttribute('data-passme-identifier', passmeIdentifier)
     dispatch(addItem({ uuid: passmeIdentifier }))
+    addEventListeners(element, dispatch)
   }
 
   // Render Tracker Component for [type="text"] and [type="email"] elements
@@ -31,7 +43,7 @@ function onDomChange(dispatch) {
     const inputElements = document.getElementsByTagName('input')
     if (inputElements && inputElements.length) {
       for (const element of inputElements) {
-        renderPassmeComponents(element, dispatch)
+        addPassmeIdentifier(element, dispatch)
       }
     }
   } catch (error) {
