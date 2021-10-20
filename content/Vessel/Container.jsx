@@ -12,6 +12,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  border-radius: 4px;
+  padding: 16px;
+  box-sizing: border-box;
 `
 
 export default Container
