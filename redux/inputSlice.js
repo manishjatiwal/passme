@@ -29,9 +29,9 @@ export const inputSlice = createSlice({
         state.vesselStyles[uuid] = vesselStyles(element)
       })
     },
-    toogleVesselVisiblity: (state, action) => {
-      state.vesselVisiblity[action.payload] =
-        !state.vesselVisiblity[action.payload]
+    setVesselVisiblity: (state, action) => {
+      const { uuid, visible } = action.payload
+      state.vesselVisiblity[uuid] = visible
     },
     autofillGeneratedPassword: (state, action) => {
       const { uuid, password } = action.payload
@@ -47,7 +47,7 @@ export const inputSlice = createSlice({
 export const {
   addItem,
   updateStyle,
-  toogleVesselVisiblity,
+  setVesselVisiblity,
   autofillGeneratedPassword
 } = inputSlice.actions
 

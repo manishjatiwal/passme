@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid'
 import PassmeContainer from './PassmeContainer'
 import KeyIcon from '../KeyIcon'
 import Vessel from '../Vessel'
-import { addItem, updateStyle, toogleVesselVisiblity } from '_redux/inputSlice'
+import { addItem, updateStyle, setVesselVisiblity } from '_redux/inputSlice'
 
 /**
  * This function adds an focus change listiner on provided input elements
@@ -12,7 +12,7 @@ import { addItem, updateStyle, toogleVesselVisiblity } from '_redux/inputSlice'
 function addEventListeners(element, dispatch) {
   const uuid = element.getAttribute('data-passme-identifier')
   element.addEventListener('focus', event => {
-    dispatch(toogleVesselVisiblity(uuid))
+    dispatch(setVesselVisiblity({ uuid, visible: true }))
   })
 }
 

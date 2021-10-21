@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { toogleVesselVisiblity } from '_redux/inputSlice'
+import { setVesselVisiblity } from '_redux/inputSlice'
 import Icon from './Icon'
 
 /**
@@ -13,9 +13,10 @@ function KeyIcon({ uuid }) {
   const dispatch = useDispatch()
   return (
     <Icon
+      id={`passme-key-${uuid}`}
       styles={iconStyles[uuid]}
       onClick={() => {
-        dispatch(toogleVesselVisiblity(uuid))
+        dispatch(setVesselVisiblity({ uuid, visible: true }))
       }}
     />
   )
