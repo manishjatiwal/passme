@@ -38,6 +38,7 @@ export const inputSlice = createSlice({
       const element = getElement(uuid)
       element.value = password
       element.dispatchEvent(new Event('change', { bubbles: true }))
+      state.vesselVisiblity[uuid] = false
     }
   }
 })
