@@ -4,7 +4,12 @@ import { v4 as uuid } from 'uuid'
 import PassmeContainer from './PassmeContainer'
 import KeyIcon from '../KeyIcon'
 import Vessel from '../Vessel'
-import { addItem, updateStyle, setVesselVisiblity } from '_redux/inputSlice'
+import {
+  addItem,
+  removeUnmountedItem,
+  updateStyle,
+  setVesselVisiblity
+} from '_redux/inputSlice'
 
 /**
  * This function adds an focus change listiner on provided input elements
@@ -39,6 +44,7 @@ function addPassmeIdentifier(element, dispatch) {
  * This function will be called when DOM changes occurs
  */
 function onDomChange(dispatch) {
+  // Start tracking all the inputs
   try {
     const inputElements = document.getElementsByTagName('input')
     if (inputElements && inputElements.length) {
@@ -49,6 +55,9 @@ function onDomChange(dispatch) {
   } catch (error) {
     console.log(error)
   }
+
+  // Stop tracking unmounted inputs
+  dispatch(removeUnmountedItem())
 }
 
 /**

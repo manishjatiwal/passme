@@ -22,11 +22,23 @@ export const inputSlice = createSlice({
       state.iconStyles[uuid] = iconStyles(element)
       state.vesselStyles[uuid] = vesselStyles(element)
     },
+    removeUnmountedItem: state => {
+      const newUuidList = []
+      state.uuidList.map(uuid => {
+        const element = getElement(uuid)
+        if (element) {
+          newUuidList.push(uuid)
+        }
+      })
+      state.uuidList = newUuidList
+    },
     updateStyle: state => {
       state.uuidList.map(uuid => {
         const element = getElement(uuid)
-        state.iconStyles[uuid] = iconStyles(element)
-        state.vesselStyles[uuid] = vesselStyles(element)
+        if (element) {
+          state.iconStyles[uuid] = iconStyles(element)
+          state.vesselStyles[uuid] = vesselStyles(element)
+        }
       })
     },
     setVesselVisiblity: (state, action) => {
@@ -46,6 +58,7 @@ export const inputSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   addItem,
+  removeUnmountedItem,
   updateStyle,
   setVesselVisiblity,
   autofillGeneratedPassword
